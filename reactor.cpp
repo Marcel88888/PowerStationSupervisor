@@ -34,6 +34,16 @@ int Reactor::getTemp() {
     return temperature;
 }
 
-Reactor::Reactor() {
+int Reactor::getNumber() {
+    return number;
+}
+
+int Reactor::getPower() {
+    return power;
+}
+
+Reactor::Reactor(int num, int pow) {
+    number = num;
+    power = pow;
     temperature = 1000;
 }

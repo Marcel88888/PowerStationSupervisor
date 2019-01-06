@@ -1,8 +1,8 @@
 #include <iostream>
-#include "reactor.h"
+#include "menu.h"
 
 int main() {
-    Reactor a;
-    a.measureTemp();
+    Menu interface;
+    interface.menuOperation();
     return 0;
 }
