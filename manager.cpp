@@ -1,17 +1,35 @@
 #include <iostream>
 #include "manager.h"
 #include <math.h>
+#include <fstream>
 using namespace std;
 
-void Manager::addReactor(int n, int p) {
-    Reactor* reactor = new Reactor(n, p);
-    reacts.push_back(reactor);
+void Manager::addReactors(string name) {
+    ifstream file;
+    file.open(name.c_str());
+    if(file.good()) {
+        int n, t;
+        double p;
+        while (file >> n  >> p) {
+            if (n < 0 || p < 0){
+                cout<<"Incorrect data"<<endl;
+                return;
+            }
+            Reactor* reactor = new Reactor(n, p);
+            reacts.push_back(reactor);
+        }
+        file.close();
+    }
+    else {
+        cout << "Program failed to open the file" << endl;
+        return;
+    }
 }
 
 void Manager::writeReactors() {
     cout << " R E A C T O R S" << endl << endl;
     for (int i = 0; i < reacts.size(); ++i) {
-        cout << i << ":" << endl << "  Number: " << reacts[i]->getNumber() << endl;
+        cout << i+1 << ":" << endl << "  Number: " << reacts[i]->getNumber() << endl;
         cout << "  Temperature: " << reacts[i]->getTemp() << endl;
         cout << "  Power [kW]: " << reacts[i]->getPower() << endl;
     }
@@ -26,7 +44,7 @@ Reactor* Manager::getReactor(int n) {
 }
 
 void Manager::calculatePower() {
-    int p = 0;
+    double p = 0;
     for (int i = 0; i < reacts.size(); ++i)
         p += reacts[i]->getPower();
     totalPower = p;
@@ -34,7 +52,7 @@ void Manager::calculatePower() {
 
 double Manager::calculateTime(int e) {
     double time, result;
-    int p;
+    double p;
     calculatePower();
     p = getTotalPower();
     time = 1.0*e/p*1000000/3600/24;
@@ -42,7 +60,7 @@ double Manager::calculateTime(int e) {
     return result;
 }
 
-int Manager::getTotalPower() {
+double Manager::getTotalPower() {
     return totalPower;
 }
 

@@ -6,15 +6,19 @@ using namespace std;
 
 void Reactor::measureTemp() {
     srand (static_cast <unsigned int> (time (nullptr) ) );
-    int t = getTemp();
-    int a, x = 0;
+    int a, t, x = 0;
+    char buffer[ 64 ];
+    time_t tim;
+    time( & tim );
+    tm timeTM = * localtime( & tim );
+    strftime( buffer, sizeof( buffer ), "%H:%M:%S", & timeTM );
     cout << "Temperature in the reactor: " << endl << endl;
     for (int i = 0; i < 50; ++i) {
         t = rand() % 101;
         a = rand() % 2;
         if (a == 0) temperature -= t;
         else temperature += t;
-        cout << temperature << endl;
+        cout << buffer << ":  " << temperature << endl;
         if (temperature >= 1200) {
             cout << "Temperature is TOO HIGH! Try to REDUCE it!!!" << endl;
             x = 1;
@@ -38,11 +42,11 @@ int Reactor::getNumber() {
     return number;
 }
 
-int Reactor::getPower() {
+double Reactor::getPower() {
     return power;
 }
 
-Reactor::Reactor(int num, int pow) {
+Reactor::Reactor(int num, double pow) {
     number = num;
     power = pow;
     temperature = 1000;
