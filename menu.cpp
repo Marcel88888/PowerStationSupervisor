@@ -1,6 +1,7 @@
 #include <iostream>
 #include "menu.h"
 #include "manager.h"
+#include "test.h"
 using namespace std;
 
 void Menu::menuOperation() {
@@ -14,7 +15,12 @@ void Menu::menuOperation() {
         cout << " 3- test the temperature of the reactor" << endl;
         cout << " 4- check the total power of the power station" << endl;
         cout << " 5- check how long it will take to produce some amount of energy" << endl;
-        cout << " 6- exit" << endl;
+        cout << " 6- check the number of reactors" << endl;
+        cout << " 7- test reading reactors' data from file" << endl;
+        cout << " 8- test calculating the total power of the power station" << endl;
+        cout << " 9- test calculating how long it will take to produce 1000 GJ of energy" << endl;
+        cout << " 10- test checking the number of the reactors" << endl;
+        cout << " 11- exit" << endl;
         cout << "Your choice: ";
         cin >> c;
         switch (c) {
@@ -53,6 +59,30 @@ void Menu::menuOperation() {
                 break;
             }
             case 6: {
+                cout << "Number of reactors: " << man.getSize() << endl;
+                break;
+            }
+            case 7: {
+                Test tester;
+                tester.testAddingReactors(&man);
+                break;
+            }
+            case 8: {
+                Test tester;
+                tester.testPower(&man);
+                break;
+            }
+            case 9: {
+                Test tester;
+                tester.testTime(&man);
+                break;
+            }
+            case 10: {
+                Test tester;
+                tester.testSize(&man);
+                break;
+            }
+            case 11: {
                 exit(0);
             }
             default: {
@@ -61,5 +91,5 @@ void Menu::menuOperation() {
             }
         }
     }
-    while(c != 6);
+    while(c != 11);
 }
