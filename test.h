@@ -5,9 +5,9 @@
 class Test {
 
 public:
-    bool testAddingReactors (Manager* ptr);
-    bool testPower (Manager* ptr);
-    bool testTime (Manager* ptr);
-    bool testSize (Manager* ptr);
+    bool testAddingReactors (Manager*);
+    bool testPower (Manager*);
+    bool testTime (Manager*);
+    bool testSize (Manager*);
 };
 #endif //PROJECT3_TEST_H

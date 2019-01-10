@@ -8,11 +8,11 @@ void Manager::addReactors(string name) {
     ifstream file;
     file.open(name.c_str());
     if(file.good()) {
-        int n, t;
+        int n;
         double p;
         while (file >> n  >> p) {
             if (n < 0 || p < 0){
-                cout<<"Incorrect data"<<endl;
+                cout << "Incorrect data" << endl;
                 return;
             }
             Reactor* reactor = new Reactor(n, p);
@@ -32,6 +32,10 @@ void Manager::writeReactors() {
         cout << i+1 << ":" << endl << "  Number: " << reacts[i]->getNumber() << endl;
         cout << "  Temperature: " << reacts[i]->getTemp() << endl;
         cout << "  Power [kW]: " << reacts[i]->getPower() << endl;
+        if (reacts[i]->getStatus() == active)
+            cout << "  Status: active" << endl;
+        else
+            cout << "  Status: rest" << endl;
     }
 }
 
@@ -42,6 +46,7 @@ int Manager::getSize() {
 Reactor* Manager::getReactor(int n) {
     return reacts[n];
 }
+
 
 void Manager::calculatePower() {
     double p = 0;
