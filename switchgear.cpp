@@ -3,6 +3,10 @@
 
 void Switchgear::turnOnReactor(Manager* ptr, int a) {
     int j = 0, n = 1;
+    if (ptr->getReactor(a)->getStatus() == active) {
+        cout << "This reactor is already TURNED ON." << endl;
+        return;
+    }
     ptr->getReactor(a)->setStatus(active);
     ptr->getReactor(a)->writeCoolant();
     cout << "Lowering the fuel rods..." << endl << endl;

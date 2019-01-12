@@ -46,7 +46,7 @@ bool Test::testPower(Manager *ptr) {
     double epsilon = 0.001;
     ptr->calculatePower();
     if ( abs( 26.8 - ptr->getTotalPower() ) < epsilon ) {
-        cout << "Test is CORRECT" << endl;
+        cout << "Test is CORRECT." << endl;
         return true;
     }
     else {
@@ -62,7 +62,7 @@ bool Test::testTime(Manager *ptr) {
         return true;
     }
     else {
-        cout << "Test is INCORRECT" << endl;
+        cout << "Test is INCORRECT." << endl;
         return false;
     }
 }

@@ -70,8 +70,14 @@ void Menu::menuOperation() {
                 break;
             }
             case 6: {
-                cout << "Amount of energy [GJ]: ";
-                cin >> p;
+                do {
+                    a = 0;
+                    cout << "Amount of energy [GJ]: ";
+                    cin >> p;
+                    if (p > 0)
+                        break;
+                    cout << "Incorrect data." << endl;
+                } while (a == 0);
                 cout << "It will take " << man.calculateTime(p) << " days." << endl;
                 break;
             }
