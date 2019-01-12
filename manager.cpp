@@ -1,22 +1,36 @@
 #include <iostream>
 #include "manager.h"
+#include "pressWatReactor.h"
+#include "heavyWatReactor.h"
+#include "gasCoolReactor.h"
 #include <math.h>
 #include <fstream>
 using namespace std;
 
 void Manager::addReactors(string name) {
+    int a;
     ifstream file;
     file.open(name.c_str());
     if(file.good()) {
         int n;
         double p;
-        while (file >> n  >> p) {
-            if (n < 0 || p < 0){
+        while (file >> a >> n  >> p) {
+            if (a < 1 || a > 3 || n < 0 || p < 0) {
                 cout << "Incorrect data" << endl;
                 return;
             }
-            Reactor* reactor = new Reactor(n, p);
-            reacts.push_back(reactor);
+            if (a == 1) {
+                Reactor *reactor = new PressWatReactor(n, p, a);
+                reacts.push_back(reactor);
+            }
+            else if (a == 2) {
+                Reactor *reactor = new HeavyWatReactor(n, p, a);
+                reacts.push_back(reactor);
+            }
+            else {
+                Reactor *reactor = new GasCoolReactor(n, p, a);
+                reacts.push_back(reactor);
+            }
         }
         file.close();
     }
@@ -36,6 +50,15 @@ void Manager::writeReactors() {
             cout << "  Status: active" << endl;
         else
             cout << "  Status: rest" << endl;
+        if (reacts[i]->getType() == 1) {
+            cout << "  Type: pressurized water" << endl;
+        }
+        else if (reacts[i]->getType() == 2) {
+            cout << "  Type: heavy water" << endl;
+        }
+        else {
+            cout << "  Type: gas-cooled" << endl;
+        }
     }
 }
 

@@ -15,16 +15,16 @@ void Sensor::measureTemp(Manager* ptr, int z) {
     srand (static_cast <unsigned int> (time (nullptr) ) );
     int a, t, x = 0;
     char buffer[ 64 ];
-    time_t tim;
-    time( & tim );
-    tm timeTM = * localtime( & tim );
-    strftime( buffer, sizeof( buffer ), "%H:%M:%S", & timeTM );
     cout << "Temperature in the reactor: " << endl << endl;
     for (int i = 0; i < 10; ++i) {
         t = rand() % 101;
         a = rand() % 2;
         if (a == 0) temp -= t;
         else temp += t;
+        time_t tim;
+        time( & tim );
+        tm timeTM = * localtime( & tim );
+        strftime( buffer, sizeof( buffer ), "%H:%M:%S", & timeTM );
         cout << buffer << ":  " << temp << endl;
         sleep(1);
         if (temp >= 1200) {

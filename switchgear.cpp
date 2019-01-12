@@ -4,6 +4,7 @@
 void Switchgear::turnOnReactor(Manager* ptr, int a) {
     int j = 0, n = 1;
     ptr->getReactor(a)->setStatus(active);
+    ptr->getReactor(a)->writeCoolant();
     cout << "Lowering the fuel rods..." << endl << endl;
     for (int i = 0; i < 5; ++i) {
         j = 0;
